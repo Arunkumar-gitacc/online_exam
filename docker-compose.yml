@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend_app
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    networks:
+      - app_net
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: onlineexam
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: app123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -proot || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+    networks:
+      - app_net
+
+  backend:
+    build: ./Backend
+    container_name: backend_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/onlineexam?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: appuser
+      SPRING_DATASOURCE_PASSWORD: app123
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app_net
+
+volumes:
+  mysql_data:
+
+networks:
+  app_net:
