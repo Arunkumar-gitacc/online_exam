@@ -14,7 +14,8 @@ import com.jobportel.boot.repository.CandidateRepository;
 
 @RestController
 @RequestMapping("/api/candidate")
-@CrossOrigin(origins = "http://localhost:3000")
+// replaced with frontend container url
+@CrossOrigin(origins = "*")
 public class CandidateController {
 
     @Autowired

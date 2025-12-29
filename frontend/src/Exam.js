@@ -49,7 +49,7 @@ function Exam() {
   useEffect(() => {
     axios 
       //  changed localhost to container name of backend        
-      .get(`http://backend_app:8080/api/questions/${SECTIONS[sectionIndex].key}`)  
+      .get(`http://localhost:8080/api/questions/${SECTIONS[sectionIndex].key}`)  
       .then(res => {
         setQuestions(res.data);
         setQIndex(0);
@@ -93,7 +93,7 @@ function Exam() {
       selectedOption: answers[qid]
     }));
     // changed localhost to container name of backend 
-    axios.post("http://backend_app:8080/api/result/submit", {
+    axios.post("http://localhost:8080/api/result/submit", {
       candidateEmail: candidate.email,
       answers: answerList
     })

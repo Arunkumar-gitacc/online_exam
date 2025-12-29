@@ -19,7 +19,8 @@ import com.jobportel.boot.repository.QuestionRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://frontend:8081")
+// replaced with frontend container url
+@CrossOrigin(origins = "*")
 public class ExamController {
 
     @Autowired

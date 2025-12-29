@@ -12,7 +12,8 @@ function Result() {
     if (!candidate?.email) return;
 
     axios
-      .get(`http://backend_app:8080/api/result/email/${candidate.email}`)
+       // changed localhost to container name of backend
+      .get(`http://localhost:8080/api/result/email/${candidate.email}`)
       .then(res => setResult(res.data))
       .catch(err => console.error(err));
   }, []);

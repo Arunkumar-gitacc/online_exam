@@ -20,7 +20,7 @@ import com.jobportel.boot.repository.ResultRepository;
 @RestController
 @RequestMapping("/api/result")
 // replaced with frontend container url
-@CrossOrigin(origins = "http://frontend:8081")
+@CrossOrigin(origins = "*")
 public class ResultController {
 
     @Autowired

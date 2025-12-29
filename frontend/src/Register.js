@@ -41,7 +41,7 @@ function Register() {
     if (!validate()) return;
     setLoading(true);
     // changed localhost to container name of backend 
-    axios.post("http://backend_app:8080/api/candidate/register", data)
+    axios.post("http://localhost:8080/api/candidate/register", data)
       .then(res => {
         const candidateId = res.data.id || res.data;
         localStorage.setItem("candidate", JSON.stringify({ id: candidateId, email: data.email }));
